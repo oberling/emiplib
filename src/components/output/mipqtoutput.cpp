@@ -41,6 +41,7 @@
 #include <qimage.h>
 #include <qpainter.h>
 #include <iostream>
+#include <cstdlib> // needed for exit
 
 #include "mipdebug.h"
 
