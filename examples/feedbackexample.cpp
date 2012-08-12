@@ -145,7 +145,9 @@ int main(void)
 	// We'll convert to a sampling rate of 8000Hz and mono sound.
 	
 	int samplingRate = 8000;
+	int outSamplingRate = 44100;
 	int numChannels = 1;
+	int outChannels = 2;
 
 	returnValue = sampConv.init(samplingRate, numChannels);
 	checkError(returnValue, sampConv);
@@ -208,15 +210,15 @@ int main(void)
 
 	// We'll make sure that received audio frames are converted to the right
 	// sampling rate.
-	returnValue = sampConv2.init(samplingRate, numChannels);
+	returnValue = sampConv2.init(outSamplingRate, outChannels);
 	checkError(returnValue, sampConv2);
 
 	// Initialize the mixer.
-	returnValue = mixer.init(samplingRate, numChannels, interval);
+	returnValue = mixer.init(outSamplingRate, outChannels, interval);
 	checkError(returnValue, mixer);
 
 	// Initialize the soundcard output.
-	returnValue = sndCardOutput.open(samplingRate, numChannels, interval);
+	returnValue = sndCardOutput.open(outSamplingRate, outChannels, interval);
 	checkError(returnValue, sndCardOutput);
 
 #ifdef MIPCONFIG_SUPPORT_WINMM
