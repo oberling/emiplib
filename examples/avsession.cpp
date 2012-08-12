@@ -5,7 +5,7 @@
 #include <mipconfig.h>
 
 #if defined(MIPCONFIG_SUPPORT_QT) && defined(MIPCONFIG_SUPPORT_AVCODEC) \
-	&& ( (defined(MIPCONFIG_SUPPORT_OSS) && defined(MIPCONFIG_SUPPORT_VIDEO4LINUX)) || \
+	&& ( ((defined(MIPCONFIG_SUPPORT_OSS) || defined(MIPCONFIG_SUPPORT_PORTAUDIO)) && defined(MIPCONFIG_SUPPORT_VIDEO4LINUX)) || \
 	     (defined(MIPCONFIG_SUPPORT_WINMM) && defined(MIPCONFIG_SUPPORT_DIRECTSHOW)) )
 
 #include <mipvideosession.h>
