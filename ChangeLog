@@ -1,0 +1,199 @@
+
+
+                              EMIPLIB ChangeLog
+
+
+Version 1.1.1, November 2011
+ * Fixed a bug in the CMake configuration: was unable to handle
+   path names with spaces.
+ * In an MS-Windows environment you can now choose to build a
+   DLL instead of a static library. This should make it easier
+   to comply with the LGPL when working on that platform.
+
+Version 1.1.0, July 2011
+ * Switched to CMake build system.
+ * Bugfix in MIPAVCodecFrameConverter. Forgot to copy media info.
+ * Added MIPYUV420FileInput.
+ * Added MIPYUV420FrameCutter.
+ * Changed MIPRTPL16Encoder and MIPRTPL16Decoder, to make it possible
+   to use a sampling rate different from 44100 Hz.
+ * Added SILK based encoding/decoding components, and corresponding
+   RTP encoding/decoding components.
+ * Made adjustments for newer jthread & jrtplib versions.
+ * Fixed bug in PortAudio input/output component.
+ * Made it possible to specify a specific device in the WinMM input
+   and output components.
+
+Version 1.0.0, July 2010
+ * Fixed bugs in MIPComponentChain. The feedback chain building
+   procedure had to be adjusted slightly to handle the case in
+   which multiple feedback chains go through the same component.
+   Also, the procedure needed to start from the ordered list of
+   connections, not the input list.
+ * Added MIPAudioTrackOutput and MIPAudioRecorderInput for Android 
+   platform.
+ * Removed libavcodec code from MIPDirectShowCapture. Component now
+   generates either YUV420P or YUYV422 data, which can be converted
+   using a MIPAVCodecFrameConverter instance. Corresponding changes
+   were made to MIPVideoSession.
+ * MIPAVCodecDecoder was modified so that the user can choose to
+   ignore data before the first keyframe.
+ * Created components MIPRTPH263Encoder and MIPRTPH263Decoder which
+   cause H.263 video to be encapsulated correctly in RTP packets.
+ * Added MIPRTPPacketGrouper utility. When data (a single video
+   frame for example) has to be split over multiple RTP packets,
+   this class can help group these packets so that they can be
+   recombined again.
+ * Added MIPComponentAlias, which basically allows you to refer
+   to the same component using a different pointer. See documentation
+   for an example of its usage.
+ * MIPRTPPacketDecoder interface (and implementation in derived
+   classes) changed somewhat. When data (like a video frame) is split
+   over several RTP packets, it is possible that a single packet
+   signals the completion of more than one frame. Interface was
+   changed to support this, and corresponding changes to MIPRTPDecoder
+   were made.
+ * Old, non standard, video encapsulation in RTP code now also supports
+   video frames that are larger than a maximum packet size (i.e. data
+   will be split over multiple RTP packets when necessary). Support
+   for sending raw YUV420P frames was added as well.
+ * MIPVideoSession was modified to allow the user to choose between
+   several video encodings/compressions. The session can also be
+   initialized for output only, no video is captured in that case.
+
+Version 0.17.0, August 2009
+ * Added a virtual function to the WAV file input components which gets
+   called when the last block of the file has been read. This allows
+   you to stop the chain at that point.
+ * Added some methods to MIPAudioMixer to allow you to ignore the
+   audio from particular sources.
+ * Added methods to MIPAudioMixer to set the internal timer to a
+   specific value.
+ * Added support for echo cancellation using the Speex routines.
+ * Modified MIPAudioMixer so that the setExtraDelay method also works
+   if the timing information in the messages is not used.
+ * Changed U-Law and A-Law decoding to a table-lookup method. This also
+   fixes a bug in the A-Law decoding as was reported by João Pedro Motondon
+   (joao.motondon@gmail.com).
+ * Support for newer ffmpeg API.
+ * Video4Linux2 based input component was added.
+ * Added a libavcodec based video frame converter.
+ * Added a component to decompress JPEG encoded video frames using the
+   TinyJPEG library.
+
+Version 0.16.1, February 2008
+ * Fixed a bug in MIPInterChainTimer. Forgot to initialize a variable,
+   causing the timing to fail.
+
+Version 0.16.0, December 2007
+ * Modified the MIPWinMMOutput component slightly. The changes should
+   help avoid running out of buffers.
+ * Fixed some compilation issues on WinCE in the lpccodec.cpp file.
+ * Added L16 RTP payload types.
+ * Improved support for user defined RTPSession instances in 
+   MIPAudioSession and MIPVideoSession.
+ * Added support for soundcard input/output using PortAudio.
+ * Added MIPStreamBuffer, a class which can be used to safely pass
+   data between threads.
+ * Added MIPInterChainTimer, which allows the timing of one chain to
+   depend on another chain.
+ * Modified MIPAudioSession to use a MIPInterChainTimer component
+   if possible. This should improve audio quality.
+
+Version 0.15.0, August 2007:
+ * Changed the MIPMessage filtering somewhat. The previous implementation
+   did not create the desired behaviour.
+ * Added A-law compression/decompression. Thanks to Jim Heising
+   (JHeising@worksoutsoft.com) for contributing the code.
+ * Fixed bug in MIPWAVReader (8-bit samples were interpreted wrong)
+ * In MIPAudioSession, other sampling intervals than the defaults can now 
+   be used.
+ * In MIPAudioSession, you can now select between a number of compression
+   types.
+ * Added MIPAudioFilter, with which you can remove certain frequencies from
+   audio data.
+ * Added GSM 06.10 compression/decompression.
+ * Added LPC compression/decompression.
+ * Added an OpenAL output component.
+
+Version 0.14.0, February 2007:
+ * Added MIPWAVWriter and MIPWAVOutput. They allow simple sound recording
+   in case libsndfile isn't available.
+ * Fixed bug in MIPRTPSpeexDecoder which caused problems when different
+   sources used different Speex compression modes.
+
+Version 0.13.0, August 2006:
+ * Modified the MIPRTPDecoder component. Now, the timestamp unit returned
+   by a MIPRTPPacketDecoder instance can be stored in the corresponding
+   RTPSourceData instance.
+ * Added a simple 3D audio implementation which only takes distance into
+   account.
+ * Added the possibility to start audio threads with high priority in
+   Win32 and WinCE implementations.
+ * Fixed the lack of a 'm_init=false' statement in the destroy function
+   of MIPAudioSession and MIPVideoSession.
+ * If a MIPRTPSynchronizer is used in a MIPRTPDecoder, it is now only used
+   every two seconds. In between, a cached synchronization offset is used.
+ * Added memory tracking debug code and thread debug code.
+
+Version 0.12.0, July 2006:
+ * Added MIPResample template function.
+ * Added SDL audio output component.
+ * Changed the transmission system. Now, a specific RTP decoder can be
+   linked to one or more payload types.
+ * Changed the RTP Speex encoder and decoder so that they no longer
+   use the 'info' byte transmitted in the previous versions. RTP packets
+   will now only contain Speex data.
+ * Added a MIPSpeexUtil class which can be used to detect the way a Speex
+   frame was encoded (narrow band, wide band or ultra wide band).
+ * Added U-law encoder/decoder and PCMU RTP encoder/decoder.
+ * The DirectShow input component should now work better. Thanks to Andrea 
+   Fontana (advmail@katamail.com) for supplying the patches.
+ * Made it possible to change the connections in a chain while it is
+   running.
+ * Some parameters in the Speex encoder were not used. Thanks to  
+   Peter De Cleyn (peter.decleyn@ua.ac.be) for pointing this out.
+
+Version 0.11.0, April 2006:
+ * Adjusted the audio session component to make it possible to select
+   a specific Speex encoding mode (narrow band, wide band, ultra wide 
+   band)
+ * Created a template function to resample audio. Calculations can
+   now be done completely using integers.
+ * Modified the MIPSamplingRateConverter to allow 16 bit signed samples
+   too.
+ * In MIPAudioSession and MIPVideoSession, an RTP BYE packet is sent
+   when the session is stopped.
+ * A MIPSamplingRateConverter object was added to the MIPAudioSession
+   class. Otherwise, a Speex packet corresponding to a different
+   sampling rate would cause the output chain to stop.
+ * Added a JACK audio output component.
+ * Added a JACK audio input component.
+ * Added checks in the configure script for OSS and Video4Linux.
+ * Removed background thread from the ESD output component.
+ * Added pkg-config files.
+
+Version 0.10.0, March 2006:
+ * Fixed bug in MIPAudioSession. In the GNU/Linux version, when the same
+   OSS device was used for both input and output, there were some problems.
+ * Added ESD audio output component.
+ * Added 16 bit signed and unsigned raw audio messages using native byte
+   order.
+ * Modified the MIPSampleEncoder component. Now, an int32_t is used as an
+   intermediate format instead of a float. This should speed things up on
+   devices without FPU.
+ * The MIPWAVReader can now also read samples as int16_t values (instead
+   of only float values)
+ * The MIPWAVInput component can now also produce samples as 16 bit (native
+   byte order) audio messages.
+ * Added Audio File Library audio input component.
+ * The DirectShow webcam input component now allows the selection of a
+   specific device (in case more than one is available).
+ * The audio mixer and Speex components can now also use integer samples
+   instead of floating point samples only.
+ * Added a post-build batch file for the MS-Windows version which copies
+   all the header files to an 'include' subdirectory.
+
+Version 0.9.0, January 2006:
+ * Initial release
+

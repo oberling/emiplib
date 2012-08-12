@@ -1,0 +1,7 @@
+Name: EMIPLIB
+Description: EDM Media over IP Library
+Requires:
+Version: ${VERSION}
+Libs: ${EMIPLIB_LIBS_PKGCONFIG}
+Cflags: ${EMIPLIB_INCDIRS_PKGCONFIG}
+

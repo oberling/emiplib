@@ -1,0 +1,9 @@
+
+EMIPLIB TODO list:
+
+ * Remove Video4Linux component
+ * Add codecs for video.
+ * Improve the ALSA output component.
+ * Add 8-bit sample support to the ESD output component.
+ * Rewrite the audio session to allow a choice between available input 
+   and output components.
