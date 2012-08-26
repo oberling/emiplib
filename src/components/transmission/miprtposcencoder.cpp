@@ -30,9 +30,7 @@
 #include "mipdebug.h"
 
 #define MIPRTPOSCENCODER_ERRSTR_BADMESSAGE		"Can't understand message"
-#define MIPRTPOSCENCODER_ERRSTR_NOTINIT		"RTP A-law encoder not initialized"
-#define MIPRTPOSCENCODER_ERRSTR_BADSAMPLINGRATE	"Only a sampling rate of 8kHz is allowed"
-#define MIPRTPOSCENCODER_ERRSTR_BADCHANNELS		"Only mono audio is allowed"
+#define MIPRTPOSCENCODER_ERRSTR_NOTINIT		"RTP OSC encoder not initialized"
 
 MIPRTPOSCEncoder::MIPRTPOSCEncoder() : MIPRTPEncoder("MIPRTPOSCEncoder")
 {

@@ -36,8 +36,8 @@
 
 class MIPRTPSendMessage;
 
-/** Creates RTP packets for A-law encoded audio packets.
- *  This component accepts incoming A-law encoded 8000Hz mono audio packets and generates
+/** Creates RTP packets for OSCMessages.
+ *  This component accepts incoming OSCMessages and generates
  *  MIPRTPSendMessage objects which can then be transferred to a MIPRTPComponent instance.
  */
 class EMIPLIB_IMPORTEXPORT MIPRTPOSCEncoder : public MIPRTPEncoder
