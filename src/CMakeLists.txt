@@ -107,6 +107,7 @@ components/codec/miptinyjpegdecoder.h
 components/codec/mipsilkdecoder.h
 components/codec/mipsilkencoder.h
 components/codec/miposcencoder.h
+components/codec/miposcdecoder.h
 sessions/mipaudiosession.h
 sessions/mipvideosession.h
 util/miprtpsynchronizer.h
@@ -204,6 +205,7 @@ components/codec/mipgsmencoder.cpp
 components/codec/mipsilkdecoder.cpp
 components/codec/mipsilkencoder.cpp
 components/codec/miposcencoder.cpp
+components/codec/miposcdecoder.cpp
 sessions/mipvideosession.cpp
 sessions/mipaudiosession.cpp
 util/mipsignalwaiter.cpp
