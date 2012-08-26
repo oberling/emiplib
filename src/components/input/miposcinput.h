@@ -58,7 +58,7 @@ public:
 	/** Selects which source ID will be set in outgoing osc messages. */
 	void setSourceID(uint64_t sourceID)							{ m_sourceID = sourceID; }
 
-	bool push(lo_message msg);
+	bool push(lo_message msg, const char* path);
 
 	bool push(const MIPComponentChain &chain, int64_t iteration, MIPMessage *pMsg);
 	bool pull(const MIPComponentChain &chain, int64_t iteration, MIPMessage **pMsg);

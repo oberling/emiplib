@@ -46,23 +46,26 @@ public:
 /** Constructor of the class.
 	 *  Constructor of the class, meant to be used by subclasses.
 	 */
-	MIPOSCMessage(uint32_t msgSubtype, lo_message msg) : MIPMediaMessage(OSC, true, msgSubtype)
-													{ m_msg = msg; }
-	MIPOSCMessage(lo_message msg) : MIPMediaMessage(OSC, true, MIPMESSAGE_TYPE_OSC)
-													{ m_msg = msg; }
+	MIPOSCMessage(uint32_t msgSubtype, lo_message msg, const char* path) : MIPMediaMessage(OSC, true, msgSubtype)
+													{ m_msg = msg; m_path = path; }
+	MIPOSCMessage(lo_message msg, const char* path) : MIPMediaMessage(OSC, true, MIPMESSAGE_TYPE_OSC)
+													{ m_msg = msg; m_path = path; }
 
 	~MIPOSCMessage()										{ lo_message_free(m_msg); }
 
 	/** Returns the stored OSC Message */
 	lo_message getMessage()									{ return m_msg; }
 
+	const char* getPath()									{ return m_path; }
+
 	/** Stores the msg */
 	void setMessage(lo_message msg)							{ m_msg = msg; }
 
 	/** Copies the info stored in \c msg, including the MIPMediaMessage info. */
-	void copyOSCInfoFrom(MIPOSCMessage &msg)							{ copyMediaInfoFrom(msg); m_msg=msg.m_msg; }
+	void copyOSCInfoFrom(MIPOSCMessage &msg)							{ copyMediaInfoFrom(msg); m_msg=msg.m_msg; m_path = msg.m_path; }
 private:
 	lo_message m_msg;
+	const char* m_path;
 };
 
 #endif // MIPCONFIG_SUPPORT_OSC

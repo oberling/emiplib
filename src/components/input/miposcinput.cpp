@@ -54,8 +54,8 @@ bool MIPOSCInput::destroy() {
 	return true;
 }
 
-bool MIPOSCInput::push(lo_message msg) {
-	MIPOSCMessage* pNewMsg = new MIPOSCMessage(msg);
+bool MIPOSCInput::push(lo_message msg, const char* path) {
+	MIPOSCMessage* pNewMsg = new MIPOSCMessage(msg, path);
 	m_messages.push_back(pNewMsg);
 	return true;
 }

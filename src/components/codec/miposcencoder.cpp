@@ -96,7 +96,7 @@ bool MIPOSCEncoder::push(const MIPComponentChain &chain, int64_t iteration, MIPM
 	// here we could do some encoding and stuff
 	// like history and stuff
 
-	MIPOSCMessage* pNewMsg = new MIPOSCMessage(pOSCMsg->getMessage());
+	MIPOSCMessage* pNewMsg = new MIPOSCMessage(pOSCMsg->getMessage(), pOSCMsg->getPath());
 	pNewMsg->copyMediaInfoFrom(*pOSCMsg);
 
 	m_messages.push_back(pNewMsg);
