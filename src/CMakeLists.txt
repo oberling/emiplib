@@ -4,6 +4,7 @@ set(HEADERS
 core/mipcompat.h
 core/mipmessage.h
 core/mipmediamessage.h
+core/miposcmessage.h
 core/miperrorbase.h
 core/mipfeedback.h
 core/mipversion.h
@@ -33,6 +34,7 @@ components/input/mipwavinput.h
 components/input/mipaudiofileinput.h
 components/input/mipwinmminput.h
 components/input/mipyuv420fileinput.h
+components/input/miposcinput.h
 components/output/mipsdlaudiooutput.h
 components/output/mipjackoutput.h
 components/output/mipesdoutput.h
@@ -44,7 +46,7 @@ components/output/mipsndfileoutput.h
 components/output/mipvideoframestorage.h
 components/output/mipaudiotrackoutput.h
 components/output/mipwavoutput.h
-components/output/mipwinmmoutput.h 
+components/output/mipwinmmoutput.h
 components/timer/mipinterchaintimer.h
 components/timer/mipaveragetimer.h
 components/timer/mippusheventtimer.h
@@ -102,6 +104,7 @@ components/codec/miplpcencoder.h
 components/codec/miptinyjpegdecoder.h
 components/codec/mipsilkdecoder.h
 components/codec/mipsilkencoder.h
+components/codec/miposcencoder.h
 sessions/mipaudiosession.h
 sessions/mipvideosession.h
 util/miprtpsynchronizer.h
@@ -128,8 +131,9 @@ components/input/mipv4l2input.cpp
 components/input/mipfrequencygenerator.cpp
 components/input/mipwavinput.cpp
 components/input/mipaudiofileinput.cpp
-components/input/mipwinmminput.cpp 
+components/input/mipwinmminput.cpp
 components/input/mipyuv420fileinput.cpp
+components/input/miposcinput.cpp
 components/output/mipjackoutput.cpp
 components/output/mipesdoutput.cpp
 components/output/mipopenaloutput.cpp
@@ -195,6 +199,7 @@ components/codec/mipspeexencoder.cpp
 components/codec/mipgsmencoder.cpp
 components/codec/mipsilkdecoder.cpp
 components/codec/mipsilkencoder.cpp
+components/codec/miposcencoder.cpp
 sessions/mipvideosession.cpp
 sessions/mipaudiosession.cpp
 util/mipsignalwaiter.cpp
@@ -204,7 +209,7 @@ util/mipdirectorybrowser.cpp
 util/mipwavreader.cpp
 util/mipspeexutil.cpp
 util/miprtpsynchronizer.cpp
-util/mipstreambuffer.cpp 
+util/mipstreambuffer.cpp
 thirdparty/gsm/src/gsm_add.cpp
 thirdparty/gsm/src/gsm_destroy.cpp
 thirdparty/gsm/src/gsm_implode.cpp

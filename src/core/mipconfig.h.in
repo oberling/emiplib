@@ -1,7 +1,7 @@
 /*
-    
+
   This file is a part of EMIPLIB, the EDM Media over IP Library.
-  
+
   Copyright (C) 2006-2011  Hasselt University - Expertise Centre for
                       Digital Media (EDM) (http://www.edm.uhasselt.be)
 
@@ -17,7 +17,7 @@
 
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
   USA
 
 */
@@ -81,6 +81,8 @@ ${MIPCONFIG_SUPPORT_WINMM}
 ${MIPCONFIG_SUPPORT_DIRECTSHOW}
 
 ${MIPCONFIG_SUPPORT_SILK}
+
+${MIPCONFIG_SUPPORT_OSC}
 
 #ifdef MIPCONFIG_SUPPORT_AVCODEC
 	#ifndef __STDC_CONSTANT_MACROS

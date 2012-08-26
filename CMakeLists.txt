@@ -76,6 +76,18 @@ endif (EMIPLIB_SUPPORT_WINMM)
 
 emiplib_support_option("Support for DirectShow" EMIPLIB_SUPPORT_DIRECTSHOW MIPCONFIG_SUPPORT_DIRECTSHOW OFF "// No support for DirectShow video input codec")
 
+find_package(Liblo)
+if (LIBLO_FOUND)
+	set(TMP ON)
+else (LIBLO_FOUND)
+	set(TMP OFF)
+endif (LIBLO_FOUND)
+emiplib_support_option("Support for liblo OSC" EMIPLIB_SUPPORT_OSC MIPCONFIG_SUPPORT_OSC ${TMP} "// No OSC support")
+if (EMIPLIB_SUPPORT_OSC AND LIBLO_FOUND)
+	list(APPEND EMIPLIB_LINK_LIBS ${LIBLO_LIBRARIES})
+	list(APPEND EMIPLIB_EXTERNAL_INCLUDES ${LIBLO_INCLUDE_DIRS})
+endif (EMIPLIB_SUPPORT_OSC AND LIBLO_FOUND)
+
 find_package(Speex)
 if (SPEEX_FOUND)
 	set(TMP ON)
@@ -296,7 +308,7 @@ else (UNIX)
 		get_target_property(EMIPLIB_LOCAL_LIBRARY_NAME emiplib-shared DEBUG_LOCATION)
 		get_filename_component(EMIPLIB_LIBNAME_DEBUG "${EMIPLIB_LOCAL_LIBRARY_NAME}" NAME_WE)
 	endif (EMIPLIB_COMPILE_STATIC)
-	set(EMIPLIB_LIBS optimized "${LIBRARY_INSTALL_DIR}/${EMIPLIB_LIBNAME_RELEASE}.lib" 
+	set(EMIPLIB_LIBS optimized "${LIBRARY_INSTALL_DIR}/${EMIPLIB_LIBNAME_RELEASE}.lib"
 		debug "${LIBRARY_INSTALL_DIR}/${EMIPLIB_LIBNAME_DEBUG}.lib")
 endif (UNIX)
 
@@ -346,4 +358,4 @@ else (EMIPLIB_GPL)
 	"library with a GPL license, linking with the Qt library will cause your\n"
 	"application to be GPL as well.\n")
 endif (EMIPLIB_GPL)
-	
+

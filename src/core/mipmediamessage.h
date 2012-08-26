@@ -1,7 +1,7 @@
 /*
-    
+
   This file is a part of EMIPLIB, the EDM Media over IP Library.
-  
+
   Copyright (C) 2006-2011  Hasselt University - Expertise Centre for
                       Digital Media (EDM) (http://www.edm.uhasselt.be)
 
@@ -17,7 +17,7 @@
 
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
   USA
 
 */
@@ -34,8 +34,8 @@
 #include "mipmessage.h"
 #include "miptime.h"
 
-/** Base class for media messages (like audio and video).
- *  This class is the base class for media messages (currently only for audio and video).
+/** Base class for media messages (like audio, video or osc).
+ *  This class is the base class for media messages (currently only for audio, video and OSC).
  *  Methods are provided to store timing information and a source identifier. Input
  *  components should store the sampling instant of the first sample in the timing
  *  information. The MIPRTPDecoder class uses the timing information to store the position
@@ -45,7 +45,7 @@ class EMIPLIB_IMPORTEXPORT MIPMediaMessage : public MIPMessage
 {
 public:
 	/** Medium type. */
-	enum MediumType { Audio, Video };
+	enum MediumType { Audio, Video, OSC };
 protected:
 	/** Constructor, intended to be used by subclasses only. */
 	/** With this constructor, a MIPMediaMessage instance can be created. It should
@@ -80,6 +80,8 @@ public:
 private:
 	static inline uint32_t calcType(MediumType mType, bool isRaw)
 	{
+		if (mType == OSC)
+			return MIPMESSAGE_TYPE_OSC;
 		if (mType == Audio)
 		{
 			if (isRaw)
@@ -90,7 +92,7 @@ private:
 			return MIPMESSAGE_TYPE_VIDEO_RAW;
 		return MIPMESSAGE_TYPE_VIDEO_ENCODED;
 	}
-			
+
 	uint64_t m_sourceID;
 	MIPTime m_time;
 };

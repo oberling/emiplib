@@ -1,7 +1,7 @@
 /*
-    
+
   This file is a part of EMIPLIB, the EDM Media over IP Library.
-  
+
   Copyright (C) 2006-2011  Hasselt University - Expertise Centre for
                       Digital Media (EDM) (http://www.edm.uhasselt.be)
 
@@ -17,12 +17,12 @@
 
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
   USA
 
 */
 
-/** 
+/**
  * \file mipmessage.h
  */
 
@@ -60,6 +60,7 @@
 #define MIPMESSAGE_TYPE_AUDIO_ENCODED							0x00000004
 #define MIPMESSAGE_TYPE_VIDEO_RAW							0x00000008
 #define MIPMESSAGE_TYPE_VIDEO_ENCODED							0x00000010
+#define MIPMESSAGE_TYPE_OSC								0x00000040
 #define MIPMESSAGE_TYPE_RTP								0x00000020
 #define MIPMESSAGE_TYPE_ALL								0xffffffff
 
