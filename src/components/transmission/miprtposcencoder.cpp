@@ -75,18 +75,18 @@ bool MIPRTPOSCEncoder::push(const MIPComponentChain &chain, int64_t iteration, M
 	MIPOSCMessage *pOSCMsg = (MIPOSCMessage *)pMsg;
 
 	void* pData=NULL;
-	size_t* size;
-	lo_message_serialise(pOSCMsg->getMessage(), pOSCMsg->getPath(), pData, size);
+	size_t size=0;
+	pData = lo_message_serialise(pOSCMsg->getMessage(), pOSCMsg->getPath(), NULL, &size);
 
 	bool marker = false;
-	uint8_t *pPayload = new uint8_t [*size];
+	uint8_t *pPayload = new uint8_t [size];
 
-	memcpy(pPayload,pData,*size);
+	memcpy(pPayload,pData,size);
 
 	MIPRTPSendMessage *pNewMsg;
 
 	// 100 must be replaced ... dunno right now by what (timestamp-Increment)
-	pNewMsg = new MIPRTPSendMessage(pPayload,*size,getPayloadType(),marker,100);
+	pNewMsg = new MIPRTPSendMessage(pPayload,size,getPayloadType(),marker,100);
 	pNewMsg->setSamplingInstant(pOSCMsg->getTime());
 
 	m_messages.push_back(pNewMsg);

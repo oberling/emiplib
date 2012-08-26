@@ -44,30 +44,24 @@ MIPOSCInput::~MIPOSCInput()
 }
 
 bool MIPOSCInput::init() {
-	m_msgIt = m_messages.begin();
 	m_sourceID = 0;
 	return true;
 }
 
 bool MIPOSCInput::destroy() {
-	clearMessages();
+	std::queue<MIPOSCMessage *> empty;
+	std::swap(empty, m_messages);
 	return true;
 }
 
 bool MIPOSCInput::push(lo_message msg, const char* path) {
 	MIPOSCMessage* pNewMsg = new MIPOSCMessage(msg, path);
-	m_messages.push_back(pNewMsg);
+	m_messages.push(pNewMsg);
 	return true;
 }
 
 bool MIPOSCInput::push(const MIPComponentChain &chain, int64_t iteration, MIPMessage *pMsg)
 {
-	if(iteration != m_prevIteration)
-	{
-		m_prevIteration = iteration;
-		clearMessages();
-	}
-
 	if (!(pMsg->getMessageType() == MIPMESSAGE_TYPE_SYSTEM && pMsg->getMessageSubtype() == MIPSYSTEMMESSAGE_TYPE_ISTIME))
 	{
 		setErrorString(MIPOSCINPUT_ERRSTR_BADMESSAGE);
@@ -79,32 +73,13 @@ bool MIPOSCInput::push(const MIPComponentChain &chain, int64_t iteration, MIPMes
 
 bool MIPOSCInput::pull(const MIPComponentChain &chain, int64_t iteration, MIPMessage **pMsg)
 {
-	if(iteration != m_prevIteration)
-	{
-		m_prevIteration = iteration;
-		clearMessages();
-	}
-
-	if(m_msgIt == m_messages.end()) {
+	if(!m_messages.empty()) {
+		*pMsg = m_messages.front();
+		m_messages.pop();
+	} else {
 		*pMsg = 0;
-		m_msgIt = m_messages.begin();
-	}
-	else
-	{
-		*pMsg = *m_msgIt;
-		m_msgIt++;
 	}
 	return true;
-}
-
-void MIPOSCInput::clearMessages()
-{
-	std::list<MIPOSCMessage *>::iterator it;
-
-	for (it = m_messages.begin() ; it != m_messages.end() ; it++)
-		delete (*it);
-	m_messages.clear();
-	m_msgIt = m_messages.begin();
 }
 
 #endif // MIPCONFIG_SUPPORT_OSC

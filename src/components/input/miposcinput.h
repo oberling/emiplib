@@ -37,7 +37,7 @@
 #include "miposcmessage.h"
 #include "miptime.h"
 #include <string>
-#include <list>
+#include <queue>
 
 /** A sound file input component.
  *  This component can be used to read audio from a file. The component uses the
@@ -65,11 +65,8 @@ public:
 private:
 	bool init();
 	bool destroy();
-	void clearMessages();
 
-	int64_t m_prevIteration;
-	std::list<MIPOSCMessage *> m_messages;
-	std::list<MIPOSCMessage *>::const_iterator m_msgIt;
+	std::queue<MIPOSCMessage *> m_messages;
 	uint64_t m_sourceID;
 };
 
