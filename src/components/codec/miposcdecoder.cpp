@@ -93,7 +93,7 @@ bool MIPOSCDecoder::push(const MIPComponentChain &chain, int64_t iteration, MIPM
 
 	MIPOSCMessage* pOSCMsg = (MIPOSCMessage*) pMsg;
 
-	MIPOSCMessage* pNewMsg = new MIPOSCMessage(pOSCMsg->getMessage(), pOSCMsg->getPath());
+	MIPOSCMessage* pNewMsg = new MIPOSCMessage(pOSCMsg->getMessageCopy(), pOSCMsg->getPath());
 	pNewMsg->copyMediaInfoFrom(*pOSCMsg); // copy time and sourceID
 	m_messages.push_back(pNewMsg);
 

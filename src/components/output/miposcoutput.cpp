@@ -30,11 +30,14 @@
 
 #include "mipdebug.h"
 
+#include <iostream>
+
 #define MIPOSCOUTPUT_ERRSTR_PULLUNSUPPORTED			"Pull is not supported"
 #define MIPOSCOUTPUT_ERRSTR_BADMESSAGE			"Only raw audio messages are supported"
 
 MIPOSCOutput::MIPOSCOutput() : MIPComponent("MIPOSCOutput")
 {
+	std::cout<<"Hallo"<<std::endl;
 }
 
 MIPOSCOutput::~MIPOSCOutput()
@@ -50,6 +53,7 @@ bool MIPOSCOutput::push(const MIPComponentChain &chain, int64_t iteration, MIPMe
 	}
 
 	MIPOSCMessage* oscMessage = (MIPOSCMessage*) pMsg;
+	std::cout<<"pushing oscMessage to path "<<oscMessage->getPath()<<std::endl;
 	m_messages.push(oscMessage);
 	return true;
 }

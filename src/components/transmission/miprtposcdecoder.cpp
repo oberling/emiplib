@@ -57,12 +57,18 @@ void MIPRTPOSCDecoder::createNewMessages(const RTPPacket *pRTPPack, std::list<MI
 	size_t length = pRTPPack->GetPayloadLength();
 	uint8_t *pData = new uint8_t [length];
 	char* path;
+	if(pData == NULL) {
+	}
 
 	memcpy(pData, pRTPPack->GetPayloadData(), length);
 	path = (char*) pData;
 	int lo_error_code;
 
 	lo_message ploOSCMsg = lo_message_deserialise((void*) pData, length, &lo_error_code);
+	if(ploOSCMsg == NULL) {
+	}
+	if(lo_error_code!=0) {
+	}
 
 	MIPOSCMessage* pOSCMsg = new MIPOSCMessage(ploOSCMsg, path);
 

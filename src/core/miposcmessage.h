@@ -55,6 +55,7 @@ public:
 
 	/** Returns the stored OSC Message */
 	lo_message getMessage()									{ return m_msg; }
+	lo_message getMessageCopy()	{return lo_message_copy(m_msg);	}
 
 	const char* getPath()									{ return m_path; }
 
