@@ -37,7 +37,6 @@
 
 MIPOSCOutput::MIPOSCOutput() : MIPComponent("MIPOSCOutput")
 {
-	std::cout<<"Hallo"<<std::endl;
 }
 
 MIPOSCOutput::~MIPOSCOutput()
@@ -53,7 +52,7 @@ bool MIPOSCOutput::push(const MIPComponentChain &chain, int64_t iteration, MIPMe
 	}
 
 	MIPOSCMessage* oscMessage = (MIPOSCMessage*) pMsg;
-	std::cout<<"pushing oscMessage to path "<<oscMessage->getPath()<<std::endl;
+	std::cout<<"pushing oscMessage to path "<<oscMessage->getPath()<<" came from source: "<<oscMessage->getSourceID()<<std::endl;
 	m_messages.push(oscMessage);
 	return true;
 }
