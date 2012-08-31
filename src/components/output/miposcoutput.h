@@ -48,6 +48,8 @@ public:
 	MIPOSCOutput();
 	~MIPOSCOutput();
 
+	std::queue<MIPOSCMessage *>* messages() { return &m_messages; }
+
 	bool push(const MIPComponentChain &chain, int64_t iteration, MIPMessage *pMsg);
 	bool pull(const MIPComponentChain &chain, int64_t iteration, MIPMessage **pMsg);
 private:

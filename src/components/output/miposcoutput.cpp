@@ -31,6 +31,7 @@
 #include "mipdebug.h"
 
 #include <iostream>
+#include <cstring>
 
 #define MIPOSCOUTPUT_ERRSTR_PULLUNSUPPORTED			"Pull is not supported"
 #define MIPOSCOUTPUT_ERRSTR_BADMESSAGE			"Only raw audio messages are supported"
@@ -52,8 +53,10 @@ bool MIPOSCOutput::push(const MIPComponentChain &chain, int64_t iteration, MIPMe
 	}
 
 	MIPOSCMessage* oscMessage = (MIPOSCMessage*) pMsg;
+	MIPOSCMessage* toQueue = new MIPOSCMessage(oscMessage->getMessageCopy(), strdup(oscMessage->getPath()));
+	toQueue->copyMediaInfoFrom(*oscMessage);
 	std::cout<<"pushing oscMessage to path "<<oscMessage->getPath()<<" came from source: "<<oscMessage->getSourceID()<<std::endl;
-	m_messages.push(oscMessage);
+	m_messages.push(toQueue);
 	return true;
 }
 
