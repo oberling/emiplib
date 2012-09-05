@@ -102,6 +102,7 @@ bool MIPOSCEncoder::push(const MIPComponentChain &chain, int64_t iteration, MIPM
 	m_messages.push_back(pNewMsg);
 
 	m_msgIt = m_messages.begin();
+	delete pOSCMsg;
 
 	return true;
 }

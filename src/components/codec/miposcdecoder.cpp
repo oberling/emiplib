@@ -134,8 +134,10 @@ void MIPOSCDecoder::clearMessages()
 {
 	std::list<MIPOSCMessage *>::iterator it;
 
-	for (it = m_messages.begin() ; it != m_messages.end() ; it++)
+	for (it = m_messages.begin() ; it != m_messages.end() ; it++) {
+		delete (*it)->getPath();
 		delete (*it);
+	}
 	m_messages.clear();
 	m_msgIt = m_messages.begin();
 }

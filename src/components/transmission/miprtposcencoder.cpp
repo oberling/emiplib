@@ -82,6 +82,7 @@ bool MIPRTPOSCEncoder::push(const MIPComponentChain &chain, int64_t iteration, M
 	uint8_t *pPayload = new uint8_t [size];
 
 	memcpy(pPayload,pData,size);
+	delete[] pData;
 
 	MIPRTPSendMessage *pNewMsg;
 
